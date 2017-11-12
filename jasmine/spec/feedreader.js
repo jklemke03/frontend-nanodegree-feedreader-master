@@ -115,29 +115,30 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-		 
+		
+		//Variables to track two feeds
 		var newFeed_1;
 		var newFeed_2;
+
 		//Since asynchronous bee to run load feed. This will need to be completed twice for two feeds to be completed.
 		beforeEach(function(done) {
             loadFeed(1, function() {
                 newFeed_1 = $('.feed').html();
+                loadFeed(2, function() {
+                    done();
+                });
             });        
-			loadFeed(2, function() {
-                 done();
-            });
-        });
-		
-		
-		it('feed changes', function() {
-			//First feed needs to be defined
+         });
+
+		  it('feed changes', function() {
+			//First news feed define
             expect(newFeed_1).toBeDefined();
-			//When second feed loads, set that to the feed html
-            secondFeedList = $('.feed').html();
-			//Second feed needs to be defined
+			//Load second news feed
+            newFeed_2 = $('.feed').html();
+			//Second news feed defined
             expect(newFeed_2).toBeDefined();
-			//Test to ensure second feed does not match the first
-            expect(newFeed_2).not.toEqual(newFeed_1);
-		});
+			//Check that newsFeed_1 and newsFeed_2 are not the same
+            expect(newFeed_1).not.toEqual(newFeed_2);
+         }); 
 	});
 }());
