@@ -104,8 +104,10 @@ $(function() {
 		//Make sure the entry is greater than 0
 		
 		it('at least sinble .entry element within .feed container', function() {
-            var entryLength = $('.entry').length;
+            var entryLength = document.querySelectorAll('.feed .entry').length;
             expect(entryLength).toBeGreaterThan(0);
+			
+
         });
 	});
     /* TODO: Write a new test suite named "New Feed Selection" */
